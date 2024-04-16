@@ -1,3 +1,5 @@
+import Card from "./components/Card";
+
 function App() {
   return (
     <>
@@ -28,6 +30,7 @@ function App() {
                   Available Now
                 </button>
               </div>
+              <Card />
             </div>
           </div>
         </div>
