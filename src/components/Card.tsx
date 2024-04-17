@@ -11,7 +11,7 @@ interface CoffeeItems {
   available: boolean;
 }
 
-export default function Card() {
+export default function Card({ activeButton }: { activeButton: string }) {
   const [dataCoffee, setDataCoffee] = useState([]);
 
   useEffect(() => {
@@ -29,9 +29,14 @@ export default function Card() {
 
     fetchData();
   }, []);
+
+  const filteredData = dataCoffee.filter(
+    (item: CoffeeItems) => activeButton === "all" || item.available
+  );
+
   return (
-    <div className="grid grid-cols-3 gap-7 gap-y-16 pt-4 cursor-pointer">
-      {dataCoffee.map((item: CoffeeItems) => {
+    <div className="grid lg:grid-cols-2 sm:grid-cols-1 xl:grid-cols-3 gap-7 gap-y-16 pt-4 cursor-pointer">
+      {filteredData.map((item: CoffeeItems) => {
         return (
           <div key={item.id} className="flex flex-col">
             <div className="relative">
@@ -40,11 +45,11 @@ export default function Card() {
                 alt="image-coffee"
                 className="rounded-xl mb-2"
               />
-              {item.popular ? (
+              {item.popular === true && (
                 <p className="absolute top-2 left-2 bg-[#F6C768] rounded-xl text-xs font-bold py-1 px-2">
                   Popular
                 </p>
-              ) : null}
+              )}
             </div>
             <div className="flex justify-between pt-1">
               <p className="text-[#FEF7EE] font-medium">{item.name}</p>
@@ -64,7 +69,7 @@ export default function Card() {
                     </p>
                   </div>
                   <div>
-                    {item.available ? null : (
+                    {item.available === false && (
                       <p className="text-[#ED735D] font-medium">Sold out</p>
                     )}
                   </div>
@@ -74,6 +79,11 @@ export default function Card() {
                   <div className="flex gap-x-1">
                     <img src="./Star.svg" alt="star-fill" />
                     <p className="text-[#6F757C] font-medium">No rating</p>
+                  </div>
+                  <div>
+                    {item.available === false && (
+                      <p className="text-[#ED735D] font-medium">Sold out</p>
+                    )}
                   </div>
                 </>
               )}
