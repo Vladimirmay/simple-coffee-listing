@@ -6,7 +6,11 @@ function App() {
   return (
     <>
       <div>
-        <img className="w-screen" src="./bg-cafe.jpg" alt="" />
+        <img
+          className="w-screen h-[50vh] object-cover"
+          src="./bg-cafe.jpg"
+          alt=""
+        />
 
         <div className="flex items-center justify-center">
           <div className="w-10/12  rounded-xl bg-[#1B1D1F] absolute top-48 p-24">
